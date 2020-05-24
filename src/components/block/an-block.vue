@@ -34,17 +34,18 @@
                 <img src="@/assets/icon/icon_share.png" alt="">
                 <span>4568</span>
             </div>
-            <div class="tab">
-                <img src="@/assets/icon/icon_pressed_dislike.png" alt="">
-                <span>4568</span>
+            <div class="tab" @click="changeTopStatus">
+                <img :src="!currentObj.tip_status?require('@/assets/icon/icon_unpressed_dislike.png'):require('@/assets/icon/icon_pressed_dislike.png')" alt="">
+                <span>{{currentObj.tip_num}}</span>
             </div>
             <div class="tab">
                 <img src="@/assets/icon/icon_comment.png" alt="">
                 <span>4568</span>
             </div>
-            <div class="tab">
-                <img src="@/assets/icon/icon_unpressed_thumds-up.png" alt="">
-                <span>4568</span>
+            <div class="tab" @click="changeStarStatus">
+                <img :src="!currentObj.star_status?require('@/assets/icon/icon_unpressed_thumds-up.png'):require('@/assets/icon/icon_pressed_thumds-up.png')" alt="">
+
+                <span>{{currentObj.star_num}}</span>
             </div>
         </div>
     </div>
@@ -52,7 +53,19 @@
 
 <script>
     export default {
-        name: "an-block"
+        name: "an-block",
+        props:['currentObj','currentIndex'],
+        methods:{
+            changeTopStatus(){
+                this.currentObj.tip_status = !this.currentObj.tip_status;
+                this.currentObj.tip_num += this.currentObj.tip_status ? 1 :-1;
+            },
+            changeStarStatus(){
+                this.currentObj.star_status = !this.currentObj.star_status;
+                this.currentObj.star_num += this.currentObj.star_status ? 1 :-1;
+            }
+        }
+
     }
 </script>
 
@@ -104,7 +117,9 @@
         border-radius:10px;
         height: 215px;
         box-sizing: border-box;
-        background: tan;
+        background: url("../../assets/icon/WechatIMG2.jpeg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
         margin:0 auto 12px auto;
         padding-top: 93px;
         padding-bottom: 8px;

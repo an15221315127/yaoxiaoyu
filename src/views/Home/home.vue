@@ -20,7 +20,7 @@
                     finished-text="没有更多了"
                     @load="onLoad"
             >
-                <an-block v-for="(item,index) in list" :key="index"/>
+                <an-block :current-obj="item" :current-index="index" v-for="(item,index) in list" :key="index"/>
             </van-list>
         </van-pull-refresh>
 
@@ -35,11 +35,14 @@
         data(){
             return {
                 active:'',
-                list: [],
+                list:[],
                 loading: false,
                 finished: false,
                 refreshing: false,
             }
+        },
+        watch:{
+
         },
         methods:{
             onLoad() {
@@ -48,9 +51,13 @@
                         this.list = [];
                         this.refreshing = false;
                     }
-
                     for (let i = 0; i < 10; i++) {
-                        this.list.push(this.list.length + 1);
+                        this.list.push({
+                            star_status:0,
+                            star_num:3214,
+                            tip_status:0,
+                            tip_num:4432,
+                        });
                     }
                     this.loading = false;
 
@@ -58,6 +65,7 @@
                         this.finished = true;
                     }
                 }, 1000);
+                console.log(this.list,'菏泽...')
             },
             onRefresh() {
                 // 清空列表数据
